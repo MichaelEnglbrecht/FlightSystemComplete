@@ -1,0 +1,22 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" 	xmlns:l="sap.ui.layout"
+	controllerName="sap.training.flight.controller.CarrierSelection" xmlns:html="http://www.w3.org/1999/xhtml">
+			<Page title="{i18n>title}">
+				<content>
+					<l:VerticalLayout class="sapUiContentPadding" width="100%">
+						<l:content>
+						<Label text="Carrier"/>
+							<Input id="productInputSingle" placeholder="Enter Carrier ..." showSuggestion="false" showValueHelp="true"
+								suggestionItems="{/CarrierSet}" type="Text" valueHelpRequest="handleValueHelp">
+								<suggestionItems>
+									<core:Item text="{Carrid}"/>
+								</suggestionItems>
+							</Input>
+						</l:content>
+						
+					<Panel id="carrierDetails" class="sapUiResponsiveMargin" width="auto"/>
+						
+					</l:VerticalLayout>
+				</content>
+			</Page>
+	
+</mvc:View>

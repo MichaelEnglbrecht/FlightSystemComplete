@@ -1,0 +1,38 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="sap.training.flight.controller.CreateBooking"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Page title="Create Booking" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<l:Grid defaultSpan="L12 M12 S12" width="auto">
+				<l:content>
+					<f:SimpleForm id="SimpleFormChange480" minWidth="1024" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" title="Flugbuchung"
+						labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" class="editableForm">
+						<f:content>
+							<core:Title text="Booking"/>
+							<Label text="Fluglinie"/>
+							<Input value="{viewModel>/Carrid}" enabled="false"/>
+							<Label text="Verbindung"/>
+							<Input value="{viewModel>/Connid}" enabled="false"/>
+							<Label text="Flugdatum"/>
+							<Input value="{viewModel>/Fldate}" enabled="false"/>
+							<Label text="Counter" readOnly="true"/>
+							<Input value="{viewModel>/Counter}" />
+							<Label text="Name"/>
+							<Input value="{viewModel>/Passname}">
+								<layoutData>
+									<l:GridData span="L3 M3 S4"/>
+								</layoutData>
+							</Input>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Save" icon="sap-icon://save" press="handleSavePressed"/>
+				<Button text="Cancel" icon="sap-icon://cancel" press="handleSavePressed"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

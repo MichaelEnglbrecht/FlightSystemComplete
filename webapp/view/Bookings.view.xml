@@ -1,0 +1,73 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m" controllerName="sap.training.flight.controller.Bookings"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Bookings" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Table id="idFlights" items="{ path: 'Bookings', sorter: { path: 'Fldate' }}" 
+				mode="SingleSelectMaster" 
+				title="Buchungen" growing="true" growingThreshold="10">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Flights" level="H2"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="12em">
+						<Text text="Fluggesellschaft"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="Buchungsdatum"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+						<Text text="Flugdatum"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Text text="Kundenummer"/>
+					</Column>
+					<Column hAlign="Right">
+						<Text text="Name"/>
+					</Column>
+					<Column hAlign="Right">
+						<Text text="Status"/>
+					</Column>
+					<Column>
+						<Text text="Storno"/>
+					</Column>
+					<Column>
+						<Text text="Bestätigen"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{Carrid}" text="{Carrid}"/>
+							<Text text="{OrderDate}"/>
+							<Text text="{ path: 'Fldate', type: 'sap.ui.model.type.Date', formatOptions:{pattern:'yyyy/MM/dd'}}"/>
+							<Text text="{Customid}"/>
+							<Text text="{Passname}"/>
+							<Text text="{Reserved}"/>
+							<Button text="Bestätigen" press="handleConfirmPressed" type="Accept">
+								<customData>
+									<core:CustomData key="Carrid" value="{Carrid}"/>
+									<core:CustomData key="Bookid" value="{Bookid}"/>
+								</customData>
+							</Button>
+							<Button text="Storno" press="handleStornoPressed" type="Reject">
+								<customData>
+									<core:CustomData key="Carrid" value="{Carrid}"/>
+									<core:CustomData key="Bookid" value="{Bookid}"/>
+								</customData>
+							</Button>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Create Booking" icon="sap-icon://create" press="handleCreatePressed"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

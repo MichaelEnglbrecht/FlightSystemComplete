@@ -1,0 +1,52 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout">
+	<l:VerticalLayout>
+		<ObjectHeader title="{Carrname}" number=" " numberUnit="{Currcode}" titleHref="{Url}">
+			<attributes>
+				<ObjectAttribute text="{Carrid}"></ObjectAttribute>
+				<ObjectAttribute text="{Url}"></ObjectAttribute>
+			</attributes>
+		</ObjectHeader>
+		
+	
+		
+		<Table id="idFlights" items="{ path: 'Flights', sorter: { path: 'Carrid' }}"  
+			mode="SingleSelectMaster" title="Flüge"
+			growing="true" growingThreshold="10" selectionChange="handleFlightSelection"  
+			>
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Flights" level="H2"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="12em">
+					<Text text="Fluggesellschaft"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Flugnummer"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+					<Text text="Flugdatum"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+					<Text text="Anzahl Sitzplätze"/>
+				</Column>
+				<Column hAlign="Right">
+					<Text text="Belegte Sitzplätze"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<ObjectIdentifier title="{Carrid}" text="{Carrid}"/>
+						<Text text="{Connid}"/>
+						<Text text="{ path: 'Fldate', type: 'sap.ui.model.type.Date' }"/>
+						<Text text="{Seatsmax}"/>
+						<Text text="{Seatsocc}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</l:VerticalLayout>
+</core:FragmentDefinition>

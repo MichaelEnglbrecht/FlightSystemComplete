@@ -1,0 +1,141 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "sap.training.flight",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZBC_TRAVEL_SRV": {
+				"uri": "/sap/opu/odata/sap/ZBC_TRAVEL_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "webapp/localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": {
+			"viewName": "sap.training.flight.view.Main",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sap.training.flight.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "ZBC_TRAVEL_SRV",
+				"settings": {
+					"disableHeadRequestForToken": true
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "sap.training.flight.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": "notFound"
+				}
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "carrierSelection",
+					"target": "carrierSelection"
+				},
+				{
+					"pattern": "Carrier('{carrierId}')/Flights(Carrid='{carrierId}',Connid='{connid}',Fldate='{fldate}')/Bookings",
+					"name": "bookings",
+					"target": "bookings"
+				},
+				{
+					"pattern": "Carrier('{carrierId}')/Flights(Carrid='{carrierId}',Connid='{connid}',Fldate='{fldate}')/Bookings",
+					"name": "createbooking",
+					"target": "createbooking"
+				}
+			],
+			"targets": {
+				"carrierSelection": {
+					"viewName": "CarrierSelection",
+					"viewLevel": 1
+				},
+				"bookings": {
+					"viewName": "Bookings",
+					"viewLevel": 2
+				},
+				"createbooking": {
+					"viewName": "CreateBooking",
+					"viewLevel": 2
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"transition": "show"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zdemo/webapp",
+		"_version": "1.1.0"
+	}
+}
