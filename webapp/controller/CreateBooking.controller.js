@@ -15,38 +15,32 @@ sap.ui.define([
 			var oRouter, oTarget;
 			oRouter = this.getRouter();
 			oTarget = oRouter.getTarget("createbooking");
-			oTarget.attachDisplay(function(oEvent) {
-				this._oData = oEvent.getParameter("data"); //store the data
-				var oModel = this.getOwnerComponent().getModel();
+			oTarget.attachDisplay(this._onDisplayMatched, this);
+		},
+		
+		_onDisplayMatched : function(oEvent) {
+			this._oData = oEvent.getParameter("data"); //store the data
+				
 				var carrId = this._oData.carrierId;
 				var connId = this._oData.connid;
 				var fldate = decodeURIComponent(this._oData.fldate);
 				
 				var oViewModel = new JSONModel();
-				oViewModel.setData({"Carrid":carrId, "Connid": connId,"Fldate":fldate, "Customid": "",
+				oViewModel.setData({"Carrid":carrId, "Connid": connId,"Fldate":fldate, "Customid": "154",
 				"Passname": "",
-				"Counter": "1"});
-
+				"Counter": "1"
+				
+				});
 				this.getView().setModel(oViewModel,"viewModel");
-			}, this);
-		},
+			},
 
 		handleSavePressed: function(oEvent) {
-
-			var carrId = this._oData.carrierId;
-			var connId = this._oData.connid;
-			var fldate = decodeURIComponent(this._oData.fldate);
-
-
 			var oViewModel = this.getView().getModel("viewModel");
-				var sObjectPath = this.getModel().createKey("FlightSet", {
-					Carrid: carrId,
-					Connid: connId,
-					Fldate: fldate
-				});
-		
 			var oModel = this.getOwnerComponent().getModel();
-			oModel.create("/BookingSet", oViewModel.getData(), {
+			var oViewData = oViewModel.getData();
+			oViewData.Fldate = oViewData.Fldate.replace(" ", "T");
+			
+			oModel.create("/BookingSet", oViewData , {
 				success: function(OData) {
 					jQuery.sap.require("sap.m.MessageBox");
 					sap.m.MessageBox.success("Buchung angelegt mit Buchungsnummer " + OData.Bookid);
@@ -59,7 +53,7 @@ sap.ui.define([
 		},
 
 		handleCancelPressed: function(oEvent) {
-			this.getOwnerComponent().getModel().deleteCreateEntry();
+			this.onNavBack();                         
 		}
 
 		/**

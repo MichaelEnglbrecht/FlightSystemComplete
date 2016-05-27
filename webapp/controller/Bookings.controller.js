@@ -57,7 +57,7 @@ sap.ui.define([
 
 			// No data for the binding
 			if (!oElementBinding.getBoundContext()) {
-				this.getRouter().getTargets().display("detailObjectNotFound");
+				this.getRouter().getTargets().display("notFound");
 				return;
 			}
 		},
